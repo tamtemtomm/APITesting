@@ -1,15 +1,13 @@
-import os
-from langchain_groq import ChatGroq
-from dotenv import load_dotenv
-load_dotenv()
+from langchain_together import ChatTogether
+from config import API_KEY
 
-model = ChatGroq(
-    model="llama-3.1-8b-instant",
+llm = ChatTogether(
+    model="meta-llama/Llama-3-70b-chat-hf",
     temperature=0,
     max_tokens=None,
     timeout=None,
     max_retries=2,
-    api_key=os.getenv('GROQ_API_KEY')
+    api_key=API_KEY['TOGETHER_API_KEY']
     # other params...
 )
 
@@ -20,5 +18,5 @@ messages = [
     ),
     ("human", "I love programming."),
 ]
-ai_msg = model.invoke(messages)
+ai_msg = llm.invoke(messages)
 print(ai_msg)
